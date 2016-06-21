@@ -20,7 +20,7 @@ Fork this repository.
 Copy the .git link on the right hand side of your fork of the repository. Open GitShell and cd to your project's folder. Type in the following commands:
 ```
 git init
-git remote add origin https://github.com/[yourusername]/Snake.git
+git remote add origin https://github.com/[yourusername]/Pong.git
 git fetch origin master
 git reset --hard FETCH_HEAD
 git clean -df
