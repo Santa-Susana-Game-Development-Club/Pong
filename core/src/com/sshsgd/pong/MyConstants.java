@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.Color;
 public class MyConstants {
 
 	public static enum States {
-		Spash, Title, Play, GameOver
+		Title, Play, GameOver
 	}
 	
 	public static final int WORLD_WIDTH = 1280;
 	public static final int WORLD_HEIGHT = 720;
+	
+	public static final String TITLE = "Pong";
 	
 	public static Color rgba(float r, float g, float b, float a) {
 		return new Color(r /255f, g / 255f, b / 255f, a / 255f);
@@ -23,6 +25,11 @@ public class MyConstants {
 			char rC = hex.charAt(0);
 			char gC = hex.charAt(1);
 			char bC = hex.charAt(2);
+			hex = "" + rC + rC + gC + gC + bC + bC;
+		} else if(hex.length() == 4 && hex.charAt(0) == '#') {
+			char rC = hex.charAt(1);
+			char gC = hex.charAt(2);
+			char bC = hex.charAt(3);
 			hex = "" + rC + rC + gC + gC + bC + bC;
 		}
 		if(hex.length() == 6) {

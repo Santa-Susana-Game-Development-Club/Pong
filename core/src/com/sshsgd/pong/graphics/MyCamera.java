@@ -1,4 +1,4 @@
-package com.sshsgd.pong;
+package com.sshsgd.pong.graphics;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
