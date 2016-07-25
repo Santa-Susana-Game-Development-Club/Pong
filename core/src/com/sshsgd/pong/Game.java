@@ -32,6 +32,10 @@ public class Game extends ApplicationAdapter {
 		
 		res = new Content();
 		res.loadBitmapFont("font", "prstartk.ttf", "main", 48, Color.WHITE, MyConstants.hex("#555"));
+
+        res.loadSound("sound", "ping_pong_8bit_beeep.ogg", "beep");
+        res.loadSound("sound", "ping_pong_8bit_peeeeeep.ogg", "peep");
+        res.loadSound("sound", "ping_pong_8bit_plop.ogg", "plop");
 		
 		Gdx.input.setInputProcessor(new MyInputProcessor());
 		Controllers.addListener(new XBoxListener());

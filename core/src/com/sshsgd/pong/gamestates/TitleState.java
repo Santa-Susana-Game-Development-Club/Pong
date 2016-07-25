@@ -1,11 +1,16 @@
 package com.sshsgd.pong.gamestates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Align;
 import com.sshsgd.pong.Game;
 import com.sshsgd.pong.MyConstants;
+import com.sshsgd.pong.MyConstants.States;
+import com.sshsgd.pong.entities.Ball;
+import com.sshsgd.pong.entities.Ball.BounceMode;
 import com.sshsgd.pong.graphics.MyViewport;
 import com.sshsgd.pong.managers.GameStateManager;
 import com.sshsgd.pong.managers.input.MyInput;
@@ -24,6 +29,9 @@ public class TitleState extends GameState {
 	private float gameDevY, gameDevH;
 	private float enterY;
 	
+	private Ball ball;
+    private float ballTimer;
+	
 	public TitleState(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -31,7 +39,8 @@ public class TitleState extends GameState {
 	@Override
 	protected void init() {
 		view = new MyViewport();
-		titleY = (MyConstants.WORLD_HEIGHT * .5f) + (titleH * .5f);
+		ball = new Ball(25, 25, BounceMode.ALL_SIDES);
+        ballTimer = 0;
 		setValues();
 	}
 	
@@ -42,7 +51,8 @@ public class TitleState extends GameState {
 		
 		targetWidth = MyConstants.WORLD_WIDTH - 20;
 		textX = 10;
-		
+
+		titleY = (MyConstants.WORLD_HEIGHT * .5f) + (titleH * .5f);
 		titleH = Game.res.getHeight("main", MyConstants.TITLE, targetWidth, Align.center, true);
 
 		gameDevH = Game.res.getHeight("main", gameDev, targetWidth, Align.center, true);
@@ -60,16 +70,30 @@ public class TitleState extends GameState {
 		if(MyInput.keyPressed(MyInput.BACK)) {
 			Gdx.app.exit();
 		}
+		if(MyInput.keyPressed(MyInput.START)) {
+			gsm.setState(States.Play);
+		}
 	}
 
 	@Override
 	public void update(float dt) {
 		setValues();
-
+		ball.update(dt);
+        ballTimer += dt;
+        if(ballTimer > 30) {
+            ball.reset();
+            ballTimer = 0;
+        }
 	}
 
 	@Override
 	public void draw(float dt, SpriteBatch sb, ShapeRenderer sr) {
+		sr.begin(ShapeType.Filled);
+		sr.setColor(Color.WHITE);
+		sr.setProjectionMatrix(view.getProjectionMatrix());
+		ball.draw(sr);
+		sr.end();
+		
 		sb.begin();
 		sb.setProjectionMatrix(view.getProjectionMatrix());
 		Game.res.getFont("main").draw(sb, MyConstants.TITLE, textX, titleY, targetWidth, Align.center, true);
