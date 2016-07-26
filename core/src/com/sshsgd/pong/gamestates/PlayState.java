@@ -1,5 +1,6 @@
 package com.sshsgd.pong.gamestates;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
@@ -68,12 +69,31 @@ public class PlayState extends GameState {
 
 	@Override
 	public void draw(float dt, SpriteBatch sb, ShapeRenderer sr) {
+        drawCenterLine(sr);
         sr.begin(ShapeRenderer.ShapeType.Filled);
         sr.setProjectionMatrix(myViewport.getProjectionMatrix());
         ball.draw(sr);
         playerPaddle.draw(sr);
         aiPaddle.draw(sr);
         sr.end();
+        drawScore(sb);
+	}
+
+    private void drawCenterLine(ShapeRenderer sr) {
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.setProjectionMatrix(myViewport.getProjectionMatrix());
+        float rectHeight = 5;
+        float rectWidth = 10;
+        float rectX = (MyConstants.WORLD_WIDTH * .5f) - (rectWidth * .5f);
+        int numRects = (int) Math.floor(MyConstants.WORLD_HEIGHT / (rectHeight * 2));
+        for(int i = 0; i < numRects; i++) {
+            float rectY = (rectHeight * .5f) + i * (rectHeight * 2);
+            sr.rect(rectX, rectY, rectWidth, rectHeight);
+        }
+        sr.end();
+    }
+
+    private void drawScore(SpriteBatch sb) {
         sb.begin();
         sb.setProjectionMatrix(myViewport.getProjectionMatrix());
         String left = String.valueOf(leftScore);
@@ -89,7 +109,7 @@ public class PlayState extends GameState {
         float rightY = (MyConstants.WORLD_HEIGHT * .75f) + (rightHeight * .5f);
         Game.res.getFont("main").draw(sb, right, rightX, rightY);
         sb.end();
-	}
+    }
 
 	@Override
 	public void resize(int width, int height) {
