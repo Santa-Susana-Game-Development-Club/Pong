@@ -31,6 +31,9 @@ public class TitleState extends GameState {
 	
 	private Ball ball;
     private float ballTimer;
+
+    private Color color = Color.WHITE;
+    private Color shadow = MyConstants.hex("#555");
 	
 	public TitleState(GameStateManager gsm) {
 		super(gsm);
@@ -91,7 +94,7 @@ public class TitleState extends GameState {
 		sr.begin(ShapeType.Filled);
 		sr.setColor(Color.WHITE);
 		sr.setProjectionMatrix(view.getProjectionMatrix());
-		ball.draw(sr);
+		ball.draw(sr, color, shadow);
 		sr.end();
 		
 		sb.begin();

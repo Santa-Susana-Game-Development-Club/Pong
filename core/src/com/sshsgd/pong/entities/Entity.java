@@ -1,5 +1,6 @@
 package com.sshsgd.pong.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -14,8 +15,13 @@ public abstract class Entity {
 		vel = new Vector2();
 	}
 	
-	public void draw(ShapeRenderer sr) {
-		sr.rect(getX(), getY(), getWidth(), getHeight());
+	public void draw(ShapeRenderer sr, Color color, Color shadow) {
+        Color c = sr.getColor();
+        sr.setColor(shadow);
+        sr.rect(getX() + 3, getY() - 3, getWidth(), getHeight());
+        sr.setColor(color);
+        sr.rect(getX(), getY(), getWidth(), getHeight());
+        sr.setColor(sr.getColor());
 	}
 	
 	public boolean collidingWith(Entity e) {

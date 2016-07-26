@@ -1,5 +1,6 @@
 package com.sshsgd.pong.gamestates;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -24,6 +25,9 @@ public class PlayState extends GameState {
 
     private int rightScore, leftScore;
 
+    private Color color = Color.WHITE;
+    private Color shadow = MyConstants.hex("#555");
+
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -35,6 +39,9 @@ public class PlayState extends GameState {
         playerPaddle = new PlayerPaddle(25, 100, Paddle.Side.LEFT);
         aiPaddle = new AIPaddle(25, 100, Paddle.Side.RIGHT);
         resetTime = 0;
+
+        color = Color.WHITE;
+        shadow = MyConstants.hex("#555");
 	}
 
 	@Override
@@ -72,9 +79,9 @@ public class PlayState extends GameState {
         drawCenterLine(sr);
         sr.begin(ShapeRenderer.ShapeType.Filled);
         sr.setProjectionMatrix(myViewport.getProjectionMatrix());
-        ball.draw(sr);
-        playerPaddle.draw(sr);
-        aiPaddle.draw(sr);
+        ball.draw(sr, color, shadow);
+        playerPaddle.draw(sr, color, shadow);
+        aiPaddle.draw(sr, color, shadow);
         sr.end();
         drawScore(sb);
 	}
