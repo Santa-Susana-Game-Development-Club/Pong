@@ -5,79 +5,87 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Created by JoseR on 8/2/2016.
+ */
 public abstract class Entity {
 
-	protected Rectangle bounds;
-	protected Vector2 vel;
-	
-	public Entity() {
-		bounds = new Rectangle();
-		vel = new Vector2();
-	}
-	
-	public void draw(ShapeRenderer sr, Color color, Color shadow) {
-        Color c = sr.getColor();
+    protected Rectangle bounds;
+    protected Vector2 vel;
+
+    public Entity() {
+        bounds = new Rectangle();
+        vel = new Vector2();
+    }
+
+    public void draw(ShapeRenderer sr, Color color, Color shadow) {
+        Color c = new Color(sr.getColor());
         sr.setColor(shadow);
         sr.rect(getX() + 3, getY() - 3, getWidth(), getHeight());
+        sr.setColor(c);
+        draw(sr, color);
+    }
+
+    public void draw(ShapeRenderer sr, Color color) {
+        Color c = new Color(sr.getColor());
         sr.setColor(color);
         sr.rect(getX(), getY(), getWidth(), getHeight());
-        sr.setColor(sr.getColor());
-	}
-	
-	public boolean collidingWith(Entity e) {
-		return collidingWith(e.getBounds());
-	}
-	
-	public boolean collidingWith(Rectangle r) {
-		return bounds.overlaps(r);
-	}
+        sr.setColor(c);
+    }
 
-	public float getX() {
-		return bounds.getX();
-	}
+    public boolean collidingWith(Entity e) {
+        return collidingWith(e.getBounds());
+    }
 
-	public Rectangle setX(float x) {
-		return bounds.setX(x);
-	}
+    public boolean collidingWith(Rectangle r) {
+        return bounds.overlaps(r);
+    }
 
-	public float getY() {
-		return bounds.getY();
-	}
+    public float getX() {
+        return bounds.x;
+    }
 
-	public Rectangle setY(float y) {
-		return bounds.setY(y);
-	}
+    public void setX(float x) {
+        bounds.x = x;
+    }
 
-	public float getWidth() {
-		return bounds.getWidth();
-	}
+    public float getY() {
+        return bounds.y;
+    }
 
-	public Rectangle setWidth(float width) {
-		return bounds.setWidth(width);
-	}
+    public void setY(float y) {
+        bounds.y = y;
+    }
 
-	public float getHeight() {
-		return bounds.getHeight();
-	}
+    public float getWidth() {
+        return bounds.width;
+    }
 
-	public Rectangle setHeight(float height) {
-		return bounds.setHeight(height);
-	}
+    public void setWidth(float width) {
+        bounds.width = width;
+    }
 
-	public Rectangle getBounds() {
-		return bounds;
-	}
+    public float getHeight() {
+        return bounds.height;
+    }
 
-	public void setBounds(Rectangle bounds) {
-		this.bounds = bounds;
-	}
+    public void setHeight(float height) {
+        bounds.height = height;
+    }
 
-	public Vector2 getVel() {
-		return vel;
-	}
+    public Rectangle getBounds() {
+        return bounds;
+    }
 
-	public void setVel(Vector2 vel) {
-		this.vel = vel;
-	}
-	
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+
+    public Vector2 getVel() {
+        return vel;
+    }
+
+    public void setVel(Vector2 vel) {
+        this.vel = vel;
+    }
 }

@@ -3,9 +3,9 @@ package com.sshsgd.pong.entities;
 import com.sshsgd.pong.MyConstants;
 
 /**
- * Created by JoseR on 7/25/2016.
+ * Created by JoseR on 8/3/2016.
  */
-public abstract class Paddle  extends Entity {
+public abstract class Paddle extends Entity {
 
     public enum Side {
         LEFT, RIGHT
@@ -35,6 +35,7 @@ public abstract class Paddle  extends Entity {
             bounds.y = 0;
         }
     }
+
 
     public void resetX(float width) {
         switch (side) {
