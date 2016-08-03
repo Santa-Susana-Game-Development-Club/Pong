@@ -3,7 +3,7 @@ package com.sshsgd.pong.entities;
 import com.sshsgd.pong.managers.input.MyInput;
 
 /**
- * Created by JoseR on 7/25/2016.
+ * Created by JoseR on 8/3/2016.
  */
 public class PlayerPaddle extends Paddle {
 

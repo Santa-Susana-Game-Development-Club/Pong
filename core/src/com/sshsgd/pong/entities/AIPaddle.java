@@ -1,13 +1,14 @@
 package com.sshsgd.pong.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.sshsgd.pong.MyConstants;
 
 /**
- * Created by JoseR on 7/25/2016.
+ * Created by JoseR on 8/3/2016.
  */
 public class AIPaddle extends Paddle {
 
-    float destination;
+    private float destination;
 
     public AIPaddle(float width, float height, Side side) {
         super(width, height, side);
@@ -21,7 +22,7 @@ public class AIPaddle extends Paddle {
         } else if(destination < getY()) {
             vel.y = -speed;
         } else {
-            destination = ball.getY();
+            destination = MathUtils.clamp(ball.getY(), 0, MyConstants.WORLD_HEIGHT);
         }
     }
 }
